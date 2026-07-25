@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     required: [true, "Password is required"],
     select: false
   },
-  refreshToken:{
+  refreshToken: {
     type: String,
   }
 }, { timestamps: true });
@@ -34,8 +34,8 @@ userSchema.pre('save', async function () {
 
 })
 
-userSchema.methods.isPasswordCorrect = async function (hashedPassword) {
-  return await bcrypt.compare(hashedPassword, this.password);
+userSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.password);
 }
 
 const User = mongoose.model('User', userSchema);
